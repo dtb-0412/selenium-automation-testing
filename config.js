@@ -1,15 +1,16 @@
-const BROWSER_STACK_USERNAME = 'dtb_aGOwcV'// 'thinbodng_PmFzjh';
-const BROWSER_STACK_ACCESS_KEY = '9JqmjKrxGiyVz221Xb7z'// 'XqaUkxYbAnsVCgftzdJk';
-const SERVER_URL = `https://${BROWSER_STACK_USERNAME}:${BROWSER_STACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`;
-const BASE_URL = 'https://practicesoftwaretesting.com';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const LOGIN_EMAIL = 'group15@gmail.com';
-const LOGIN_PASSWORD = 'Group15@';
-const INVALID_EMAIL = 'group15@.com';
-const INVALID_PASSWORD = '12345';
-const ELEMENT_TIMEOUT = 10000;
-const PAGE_LOAD_TIMEOUT = 20000;
+const SERVER_URL = `https://${process.env.BROWSERSTACK_USERNAME}:${process.env.BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`;
 
+const BASE_URL = process.env.BASE_URL;
+
+const LOGIN_EMAIL = process.env.LOGIN_EMAIL;
+const LOGIN_PASSWORD = process.env.LOGIN_PASSWORD;
+const INVALID_EMAIL = process.env.INVALID_EMAIL;
+const INVALID_PASSWORD = process.env.INVALID_PASSWORD;
+const ELEMENT_TIMEOUT = parseInt(process.env.ELEMENT_TIMEOUT);
+const PAGE_LOAD_TIMEOUT = parseInt(process.env.PAGE_LOAD_TIMEOUT);
 
 const COMMON_CAPABILITIES = {
     "bstack:options": {
@@ -51,7 +52,7 @@ const CAPABILITIES = [
     },
 ];
 
- export {
+export {
     SERVER_URL,
     BASE_URL,
     LOGIN_EMAIL,
