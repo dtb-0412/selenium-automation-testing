@@ -1,0 +1,196 @@
+[
+  {
+    "id": "TC-SIGNUP-01",
+    "description": "Để trống thông tin",
+    "data": {
+      "first_name": "",
+      "last_name": "",
+      "dob": "",
+      "street": "",
+      "city": "",
+      "state": "",
+      "postal_code": "",
+      "country": "",
+      "phone": "",
+      "email": "",
+      "password": ""
+    },
+    "expected": [
+      {
+        "by": "data-test",
+        "name": "first-name-error",
+        "value": "First name is required"
+      },
+      {
+        "by": "data-test",
+        "name": "last-name-error",
+        "value": "Last name is required"
+      },
+      {
+        "by": "data-test",
+        "name": "dob-error",
+        "value": "Date of Birth is required"
+      },
+      {
+        "by": "data-test",
+        "name": "street-error",
+        "value": "Street is required"
+      },
+      {
+        "by": "data-test",
+        "name": "city-error",
+        "value": "City is required"
+      },
+      {
+        "by": "data-test",
+        "name": "state-error",
+        "value": "State is required"
+      },
+      {
+        "by": "data-test",
+        "name": "postal_code-error",
+        "value": "Postcode is required"
+      },
+      {
+        "by": "data-test",
+        "name": "country-error",
+        "value": "Country is required"
+      },
+      {
+        "by": "data-test",
+        "name": "phone-error",
+        "value": "Phone is required"
+      },
+      {
+        "by": "data-test",
+        "name": "email-error",
+        "value": "Email is required"
+      },
+      {
+        "by": "data-test",
+        "name": "password-error",
+        "value": "Password is required"
+      }
+    ]
+  },
+  {
+    "id": "TC-SIGNUP-02",
+    "description": "Ngày sinh không đúng định dạng",
+    "data": {
+      "first_name": "Linh",
+      "last_name": "Pham",
+      "dob": "2001-13-40",
+      "street": "45 Hai Ba Trung",
+      "city": "Da Nang",
+      "state": "Da Nang",
+      "postal_code": "550000",
+      "country": "Vietnam",
+      "phone": "0912345678",
+      "email": "linh.pham@example.com",
+      "password": "Aa@12345"
+    },
+    "expected": [
+      {
+        "by": "data-test",
+        "name": "dob-error",
+        "value": "Please enter a valid date in YYYY-MM-DD format"
+      }
+    ]
+  },
+  {
+    "id": "TC-SIGNUP-03",
+    "description": "Người dùng dưới 18 tuổi",
+    "data": {
+      "first_name": "Kien",
+      "last_name": "Nguyen",
+      "dob": "2010-08-15",
+      "street": "72 Nguyen Thai Hoc",
+      "city": "Hue",
+      "state": "Thua Thien Hue",
+      "postal_code": "530000",
+      "country": "Vietnam",
+      "phone": "0909988776",
+      "email": "kien.nguyen@example.com",
+      "password": "Aa@12345"
+    },
+    "expected": [
+      {
+        "by": "data-test",
+        "name": "register-error",
+        "value": "Customer must be 18 years old"
+      }
+    ]
+  },
+  {
+    "id": "TC-SIGNUP-04",
+    "description": "Số điện thoại không đúng định dạng",
+    "data": {
+      "first_name": "Tuan",
+      "last_name": "Le",
+      "dob": "1998-05-09",
+      "street": "120 Tran Phu",
+      "city": "Can Tho",
+      "state": "Can Tho",
+      "postal_code": "940000",
+      "country": "Vietnam",
+      "phone": "09ABCD123",
+      "email": "tuan.le@example.com",
+      "password": "Aa@12345"
+    },
+    "expected": [
+      {
+        "by": "data-test",
+        "name": "phone-error",
+        "value": "Only numbers are allowed"
+      }
+    ]
+  },
+  {
+    "id": "TC-SIGNUP-05",
+    "description": "Email không đúng định dạng",
+    "data": {
+      "first_name": "Minh",
+      "last_name": "Tran",
+      "dob": "1995-07-22",
+      "street": "88 Le Loi",
+      "city": "Da Nang",
+      "state": "Da Nang",
+      "postal_code": "550000",
+      "country": "Vietnam",
+      "phone": "0981122334",
+      "email": "minh.tranexample.com",
+      "password": "Aa@12345"
+    },
+    "expected": [
+      {
+        "by": "data-test",
+        "name": "email-error",
+        "value": "Email format is invalid"
+      }
+    ]
+  },
+  {
+    "id": "TC-SIGNUP-06",
+    "description": "Mật khẩu quá ngắn",
+    "data": {
+      "first_name": "Hanh",
+      "last_name": "Vu",
+      "dob": "1993-02-10",
+      "street": "11 Nguyen Trai",
+      "city": "Hanoi",
+      "state": "Hanoi",
+      "postal_code": "100000",
+      "country": "Vietnam",
+      "phone": "0911223344",
+      "email": "hanh.vu@example.com",
+      "password": "hv0210"
+    },
+    "expected": [
+      {
+        "by": "data-test",
+        "name": "password-error",
+        "value": "Password must be minimal 8 characters long"
+      }
+    ]
+  }
+]
