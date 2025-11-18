@@ -1,13 +1,8 @@
 {
   "dependencies": {
-    "chromedriver": "^142.0.1",
-    "edgedriver": "^6.1.2",
-    "geckodriver": "^6.0.2",
-    "install": "^0.13.0",
     "selenium-webdriver": "^4.38.0"
   },
   "devDependencies": {
-    "browserstack-node-sdk": "^1.46.3",
     "chai": "^6.2.1",
     "mocha": "^11.7.5"
   },
