@@ -13,15 +13,15 @@ const data = JSON.parse(fs.readFileSync('./Tests Data/signup.data.json', 'utf-8'
 describe("Chức năng đăng ký", function () {
     let driver;
 
-    // Build web driver for browser before all tests
     before(async function () {
         driver = await new Builder()
             .forBrowser(Browser.EDGE)
-            .setEdgeOptions(new edge.Options().addArguments('--disable-logging'))
+            .setEdgeOptions(new edge.Options().addArguments(
+                '--disable-logging',
+                '--start-maximized'))
             .build();
     });
 
-    // Quit web driver after all tests
     after(async function () {
         await driver.quit();
     });

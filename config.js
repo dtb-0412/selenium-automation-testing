@@ -16,6 +16,7 @@ const COMMON_CAPABILITIES = {
     "bstack:options": {
         'projectName': 'Group 15 - Cross Browser Testing',
         'buildName': 'Login Functionality',
+        'sessionName': '',
     }
 };
 

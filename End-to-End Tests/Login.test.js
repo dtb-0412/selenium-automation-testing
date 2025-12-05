@@ -13,20 +13,20 @@ import { delay } from '../utils.js';
 describe("Chức năng đăng nhập", async function () {
     let driver;
     
-    // Build web driver for browser before all tests
     before(async function () {
         driver = await new Builder()
             .forBrowser(Browser.EDGE)
-            .setEdgeOptions(new edge.Options().addArguments('--disable-logging'))
+            .setEdgeOptions(new edge.Options().addArguments(
+                '--disable-features=EnableLogging',
+                '--start-maximized'
+            ))
             .build();
     });
 
-    // Navigate to login page before each test
     beforeEach(async function () {
         await driver.get(BASE_URL + '/auth/login');
     });
 
-    // Quit web driver after all tests
     after(async function () {
         await driver.quit();
     });

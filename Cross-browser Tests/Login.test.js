@@ -9,32 +9,42 @@ import {
     CAPABILITIES
 } from '../config.js';
 
-let driver;
+for (const capability of CAPABILITIES) {
+    describe(`Login functionality - ${capability.browserName}`, function () {
+        let driver;
 
-CAPABILITIES.forEach(async function (capability) {
-    describe("Login functionality", async function () {
-        // Build web driver for each browser before all tests
         before(async function () {
-            driver = new Builder()
+            console.log('Using BrowserStack server:', SERVER_URL);
+            console.log('Starting session');
+            driver = await new Builder()
                 .usingServer(SERVER_URL)
                 .withCapabilities({...capability})
                 .build();
-            console.log(`Browser session started on ${capability.browserName}`);
+            ;
+            const browserName = capability.browserName;
+            const browserVersion = capability.browserVersion;
+            const bstack = capability['bstack:options']
+            const os = bstack.os;
+            const osVersion = bstack.osVersion;
+            const sessionName = `${browserName} ${browserVersion} - ${os} ${osVersion}`;
+            try {
+                await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": sessionName}}));
+            } catch (err) {
+                console.log('Unable to set session name: ', err.message);
+            }
+            console.log(`Browser session started on: ${sessionName}`);
         });
 
-        // Navigate to login page before each test
         beforeEach(async function () {
             await driver.get(BASE_URL + '/auth/login');
 
         });
 
-        // Quit web driver after all tests
         after(async function () {
             await driver.quit();
         });
 
         it("TC-LOGIN-01: Log in successfully by clicking \"Login\"", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 
@@ -51,7 +61,6 @@ CAPABILITIES.forEach(async function (capability) {
         });
 
         it("TC-LOGIN-02: Log in successfully by pressing  \"Enter\"", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 
@@ -67,7 +76,6 @@ CAPABILITIES.forEach(async function (capability) {
         });
 
         it("TC-LOGIN-03: Password is hidden by default", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 
@@ -84,7 +92,6 @@ CAPABILITIES.forEach(async function (capability) {
         });
 
         it("TC-LOGIN-04: Password is displayed correctly", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 
@@ -102,7 +109,6 @@ CAPABILITIES.forEach(async function (capability) {
         });
 
         it("TC-LOGIN-05: Information fields is required", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 
@@ -123,7 +129,6 @@ CAPABILITIES.forEach(async function (capability) {
         });
 
         it("TC-LOGIN-06: Invalid Email format", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 await driver.findElement(By.id('email')).sendKeys(INVALID_EMAIL);
@@ -140,7 +145,6 @@ CAPABILITIES.forEach(async function (capability) {
         });
 
         it("TC-LOGIN-07: Invalid user information", async function () {
-            await driver.executeScript('browserstack_executor: ' + JSON.stringify({"action": "setSessionName", "arguments": {"name": this.test.title}}));
             try {
                 await driver.wait(until.elementLocated(By.css('[data-test="login-form"]')), ELEMENT_TIMEOUT);
                 await driver.findElement(By.id('email')).sendKeys(LOGIN_EMAIL);
@@ -157,4 +161,4 @@ CAPABILITIES.forEach(async function (capability) {
             }
         });
     });
-});
+}
